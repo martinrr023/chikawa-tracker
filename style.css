@@ -233,3 +233,17 @@ body {
   opacity: 0.5;
   text-decoration: line-through;
 }
+
+.celebration-gif {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 180px;
+  z-index: 9999;
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

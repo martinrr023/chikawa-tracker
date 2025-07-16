@@ -209,11 +209,22 @@ function updateMoodAndProgress() {
   }
 }
 
-// Confetti 🎉
+// Confetti 🎉 + Celebration GIF
 function launchConfetti() {
   const duration = 1000;
   const end = Date.now() + duration;
   const colors = ['#ffb3c1', '#fcd5ce', '#cdb4db', '#ffc8dd', '#ff8fab'];
+
+  // 🎊 Add GIF
+  const gif = document.createElement('img');
+  gif.src = 'assets/chikawa-celebrate.gif'; // ✅ make sure this path is correct
+  gif.className = 'celebration-gif';
+  document.body.appendChild(gif);
+
+  // ⏱️ Remove GIF after 4 seconds
+  setTimeout(() => {
+    gif.remove();
+  }, 4000);
 
   const interval = setInterval(() => {
     if (Date.now() > end) {
@@ -235,6 +246,7 @@ function launchConfetti() {
     }
   }, 100);
 }
+
 
 // Inject styles for confetti + bounce
 const style = document.createElement('style');
