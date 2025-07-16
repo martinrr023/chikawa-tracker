@@ -228,3 +228,8 @@ body {
   background-color: #e6fff4;
   border-left: 6px solid #27ae60;
 }
+
+.task.completed {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
