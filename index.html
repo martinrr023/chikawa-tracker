@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chikawa Tasks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div id="overlay"></div>
+    <h1>🧸 Chikawa Tasks</h1>
+
+    <!-- Mood Image -->
+    <img id="mood-image" src="assets/chikawa-neutral.png" alt="Mood" class="mood-image">
+    
+    <!-- Progress Bar -->
+<div id="progress-container">
+  <div id="progress-bar"></div>
+</div>
+<p id="progress-text">0% Complete</p>
+
+
+    <!-- Task Input Form -->
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="What do you need to do?" required />
+      <button type="submit">Add Task</button>
+      <div id="priority-buttons">
+        <button type="button" data-priority="High" class="priority-btn high">🔥 High</button>
+        <button type="button" data-priority="Medium" class="priority-btn medium">✨ Medium</button>
+        <button type="button" data-priority="Low" class="priority-btn low">🌱 Low</button>
+        <input type="hidden" id="priority-input" />
+
+      </div>
+      
+      
+    </form>
+
+    <!-- Task List -->
+    <ul id="task-list"></ul>
+    <!-- Clear All Button -->
+<button id="clear-all">Clear All Tasks</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+<!--wewekwewewererew2mm34234234234234343434ewe343434343weweewewe-->

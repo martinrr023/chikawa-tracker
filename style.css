@@ -1,0 +1,230 @@
+/* General page styling */
+body {
+  background-image: url('assets/chikawa-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+  padding: 30px;
+  text-align: center;
+}
+
+  
+  /* Main container */
+  .container {
+    max-width: 500px;
+    margin: auto;
+    background: #ffffffdd;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header */
+  h1 {
+    color: #ff80a0;
+    margin-bottom: 10px;
+  }
+  
+  /* Mood Image */
+  .mood-image {
+    width: 80px;
+    margin-bottom: 20px;
+  }
+  
+  /* Form styling */
+  form {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 10px 15px;
+    width: 65%;
+    border: 2px solid #ffc8dd;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #ffb3c1;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #ff8fab;
+  }
+  
+  /* Task List */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Individual task item */
+  li {
+    background: #ffe4ec;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.3s ease;
+  }
+  
+  /* Task text style when completed */
+  li.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+  
+  /* Chikawa icon next to task */
+  .chikawa-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  /* Task text */
+  li span {
+    flex: 1;
+    text-align: left;
+    margin-left: 10px;
+  }
+  
+  /* Buttons inside task list */
+  li button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
+  #progress-container {
+    background-color: #ffd5e5;
+    border-radius: 12px;
+    height: 20px;
+    width: 100%;
+    margin: 10px auto;
+    overflow: hidden;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  #progress-bar {
+    background-color: #ff8fab;
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  #progress-text {
+    font-size: 14px;
+    color: #ff80a0;
+    margin: 5px 0 15px;
+  }
+  
+  #clear-all {
+    background-color: #ffd6e0;
+    color: #d0005e;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #clear-all:hover {
+    background-color: #ffb3c1;
+  }
+  
+  @keyframes bounce {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.2); }
+    50%  { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  }
+  
+  #progress-bar.bounce {
+    animation: bounce 0.6s ease-in-out;
+  }
+  
+  #overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.4);
+    z-index: -1;
+  }
+  
+  .mood-image {
+    width: 150px;
+    margin-bottom: 20px;
+    animation: float 2s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+  }
+  
+  li small {
+    font-size: 12px;
+    color: #888;
+    display: block;
+    margin-top: 2px;
+  }
+  
+  #priority-buttons {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .priority-btn {
+    padding: 10px 16px;
+    font-weight: bold;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #eee;
+    transition: all 0.2s ease;
+  }
+  
+  .priority-btn.high { background-color: #ffd6d6; color: #c0392b; }
+  .priority-btn.medium { background-color: #fff3c4; color: #d68910; }
+  .priority-btn.low { background-color: #d4f8e8; color: #27ae60; }
+  
+  .priority-btn.selected {
+    border-color: #555;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  }
+
+  /* Priority-based task coloring */
+.priority-high {
+  background-color: #ffe5e9;
+  border-left: 6px solid #ff4d6d;
+}
+
+.priority-medium {
+  background-color: #fff7da;
+  border-left: 6px solid #f1c40f;
+}
+
+.priority-low {
+  background-color: #e6fff4;
+  border-left: 6px solid #27ae60;
+}
