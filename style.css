@@ -236,14 +236,17 @@ body {
 
 .celebration-gif {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 180px;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
   z-index: 9999;
-  animation: popIn 0.3s ease;
+  animation: fadeIn 0.3s ease;
+  pointer-events: none;
 }
 
-@keyframes popIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
