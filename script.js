@@ -7,12 +7,15 @@ const clearBtn = document.getElementById('clear-all');
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
+// Handle task submission
 taskForm.addEventListener('submit', e => {
   e.preventDefault();
-  if (!taskInput.value.trim()) return;
+  const text = taskInput.value.trim();
+  if (!text) return;
 
   const newTask = {
-    text: taskInput.value.trim(),
+    id: Date.now(), // Unique ID
+    text: text,
     completed: false,
     date: new Date().toLocaleDateString(),
     priority: 'Low'
@@ -24,57 +27,59 @@ taskForm.addEventListener('submit', e => {
   renderTasks();
 });
 
+// Event delegation for toggling and priority
 taskList.addEventListener('click', e => {
-  const index = e.target.dataset.index;
+  const id = parseInt(e.target.dataset.id);
+  const task = tasks.find(t => t.id === id);
+  if (!task) return;
 
   if (e.target.classList.contains('toggle-task')) {
-    tasks[index].completed = !tasks[index].completed;
-    saveTasks();
-    renderTasks();
+    task.completed = !task.completed;
   }
 
   if (e.target.classList.contains('priority-btn')) {
-    tasks[index].priority = e.target.dataset.priority;
-    saveTasks();
-    renderTasks();
+    task.priority = e.target.dataset.priority;
   }
+
+  saveTasks();
+  renderTasks();
 });
 
+// Clear all tasks
 clearBtn.addEventListener('click', () => {
   tasks = [];
   saveTasks();
   renderTasks();
 });
 
+// Render tasks, sorted by completion
 function renderTasks() {
   taskList.innerHTML = '';
 
-  const incompleteTasks = tasks.filter(t => !t.completed);
-  const completeTasks = tasks.filter(t => t.completed);
-  const sorted = [...incompleteTasks, ...completeTasks];
+  const incomplete = tasks.filter(t => !t.completed);
+  const complete = tasks.filter(t => t.completed);
+  const sorted = [...incomplete, ...complete];
 
   sorted.forEach(task => {
-    const originalIndex = tasks.indexOf(task); // ← Correct reference
-
     const li = document.createElement('li');
     li.className = 'task';
     if (task.completed) li.classList.add('completed');
 
-    // Priority color
+    // Priority border color
     if (task.priority === 'High') li.style.borderLeft = '6px solid red';
     else if (task.priority === 'Medium') li.style.borderLeft = '6px solid orange';
     else li.style.borderLeft = '6px solid green';
 
     li.innerHTML = `
       <div class="task-main">
-        <input type="checkbox" class="toggle-task" data-index="${originalIndex}" ${task.completed ? 'checked' : ''}>
+        <input type="checkbox" class="toggle-task" data-id="${task.id}" ${task.completed ? 'checked' : ''}>
         <span class="task-text">${task.text}</span>
         <small class="task-date">${task.date}</small>
       </div>
       <div class="priority-buttons">
-        <button class="priority-btn" data-priority="High" data-index="${originalIndex}">🔥</button>
-        <button class="priority-btn" data-priority="Medium" data-index="${originalIndex}">⚡</button>
-        <button class="priority-btn" data-priority="Low" data-index="${originalIndex}">🌱</button>
+        <button class="priority-btn" data-id="${task.id}" data-priority="High">🔥</button>
+        <button class="priority-btn" data-id="${task.id}" data-priority="Medium">⚡</button>
+        <button class="priority-btn" data-id="${task.id}" data-priority="Low">🌱</button>
       </div>
     `;
 
@@ -86,13 +91,13 @@ function renderTasks() {
 }
 
 function updateMood() {
-  const incomplete = tasks.filter(t => !t.completed).length;
+  const incompleteCount = tasks.filter(t => !t.completed).length;
+  let mood = 'happy';
 
-  let src = 'assets/chikawa-happy.png';
-  if (incomplete > 2) src = 'assets/chikawa-sad.png';
-  else if (incomplete > 0) src = 'assets/chikawa-neutral.png';
+  if (incompleteCount > 2) mood = 'sad';
+  else if (incompleteCount > 0) mood = 'neutral';
 
-  moodImage.src = src;
+  moodImage.src = `assets/chikawa-${mood}.png`;
 }
 
 function updateProgress() {
@@ -100,7 +105,7 @@ function updateProgress() {
   const done = tasks.filter(t => t.completed).length;
   const percent = total ? (done / total) * 100 : 0;
 
-  progressBar.style.width = percent + '%';
+  progressBar.style.width = `${percent}%`;
 
   if (percent === 100) {
     launchConfetti();
