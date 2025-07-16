@@ -53,7 +53,9 @@ function renderTasks() {
   const completeTasks = tasks.filter(t => t.completed);
   const sorted = [...incompleteTasks, ...completeTasks];
 
-  sorted.forEach((task, index) => {
+  sorted.forEach(task => {
+    const originalIndex = tasks.indexOf(task); // ← Correct reference
+
     const li = document.createElement('li');
     li.className = 'task';
     if (task.completed) li.classList.add('completed');
@@ -65,14 +67,14 @@ function renderTasks() {
 
     li.innerHTML = `
       <div class="task-main">
-        <input type="checkbox" class="toggle-task" data-index="${index}" ${task.completed ? 'checked' : ''}>
+        <input type="checkbox" class="toggle-task" data-index="${originalIndex}" ${task.completed ? 'checked' : ''}>
         <span class="task-text">${task.text}</span>
         <small class="task-date">${task.date}</small>
       </div>
       <div class="priority-buttons">
-        <button class="priority-btn" data-priority="High" data-index="${index}">🔥</button>
-        <button class="priority-btn" data-priority="Medium" data-index="${index}">⚡</button>
-        <button class="priority-btn" data-priority="Low" data-index="${index}">🌱</button>
+        <button class="priority-btn" data-priority="High" data-index="${originalIndex}">🔥</button>
+        <button class="priority-btn" data-priority="Medium" data-index="${originalIndex}">⚡</button>
+        <button class="priority-btn" data-priority="Low" data-index="${originalIndex}">🌱</button>
       </div>
     `;
 
